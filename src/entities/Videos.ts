@@ -21,6 +21,9 @@ export class Video {
   @Column({ type: 'text' })
   url: string;
 
+  @Column({default: false, nullable: true})
+  block: boolean
+
   @ManyToOne(() => Room, (room) => room.videos)
   @JoinColumn({name: 'room_id'})
   room: Room;

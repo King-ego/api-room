@@ -36,8 +36,9 @@ export class RoomController {
       const room = await RoomRepository.findOneBy({ id: idRoom });
       if (!room) return res.status(404).send({ message: 'room not found' });
 
+      const block = false
       // const room = { ...existRoom, create_at: undefined, update_at: undefined };
-      const newVideo = VideoRepository.create({ title, url, room });
+      const newVideo = VideoRepository.create({ title, url, block, room });
       const data = await VideoRepository.save(newVideo);
 
       return res.send({ data });
