@@ -54,7 +54,7 @@ export class VideoController {
   public async disabledEnabledVideo(req: Request, res: Response) {
     const { idVideo } = req.params;
     const { block } = req.body;
-    if (block === '') return res.status(402).send({ message: 'Field Requered', block });
+    // if (block === '') return res.status(402).send({ message: 'Field Requered', block });
     try {
       await VideoRepository.update(idVideo, { block });
       return res.send({ message: `id:${idVideo} Atualizado com sucessp` });
