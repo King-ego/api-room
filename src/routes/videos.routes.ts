@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { VideoController } from '../controller/Video.Controller';
 import { patchVideo } from '../middleware/zod-validated/video.scheme';
-import { validateRequest } from '../middleware/zod.middleware';
+import { validateMiddlewareRequest } from '../middleware/zod.middleware';
 
 const controller = new VideoController();
 
@@ -13,7 +13,7 @@ videoRouter.get('/filter/:name', controller.filter);
 videoRouter.get('/:idVideo', controller.show);
 videoRouter.patch(
   '/:idVideo',
-  validateRequest(patchVideo),
+  validateMiddlewareRequest(patchVideo),
   controller.disabledEnabledVideo
 );
 

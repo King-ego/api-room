@@ -5,6 +5,7 @@ import roomRouter from './room.routes';
 
 const routers = Router();
 
+
 routers.use('/videos', videoRouter)
 routers.use('/subjects', subjectRouter)
 routers.use('/rooms', roomRouter)

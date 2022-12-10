@@ -1,7 +1,9 @@
-import express, { Request, Response } from 'express';
-import cors from 'cors'
+import 'express-async-errors';
+import express from 'express';
+import cors from 'cors';
 import { AppDataSource } from './data-source';
 import routers from './routes';
+import { AppMiddlewareError } from './middleware/error.middleware';
 
 AppDataSource.initialize()
   .then(() => {
@@ -17,6 +19,8 @@ AppDataSource.initialize()
     });
 
     app.use('/api', routers);
+
+    app.use(AppMiddlewareError);
 
     return app.listen(process.env.PORT, () => {
       console.log(`Serve running in port:${process.env.PORT}`);
