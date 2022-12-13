@@ -8,12 +8,12 @@ export class VideoController {
       .orderBy('video.id', 'ASC')
       .getMany();
 
-    return res.send({ data: query });
+    return res.json({ data: query });
   }
 
   public async allVideo(_: Request, res: Response) {
     const data = await VideoRepository.find({ relations: { room: true } });
-    return res.send({ data });
+    return res.json({ data });
   }
 
   public async filter(req: Request, res: Response) {
@@ -23,7 +23,7 @@ export class VideoController {
       .leftJoinAndSelect('video.room', 'room_id')
       .where('video.block = :block', { block: false })
       .getMany();
-    return res.send({ data: query });
+    return res.json({ data: query });
   }
 
   public async show(req: Request, res: Response) {
@@ -34,13 +34,13 @@ export class VideoController {
       .where('video.block = :block', { block: false })
       .orderBy('video.id', 'ASC')
       .getOne();
-    return res.send({ data });
+    return res.json({ data });
   }
 
   public async disabledEnabledVideo(req: Request, res: Response) {
     const { idVideo } = req.params;
     const { block } = req.body;
     await VideoRepository.update(idVideo, { block });
-    return res.send({ message: `id:${idVideo} Atualizado com sucessp` });
+    return res.json({ message: `id:${idVideo} Atualizado com sucesso` });
   }
 }

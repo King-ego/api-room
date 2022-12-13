@@ -11,14 +11,14 @@ export class RoomController {
         videos: true,
       },
     });
-    return res.send({ data });
+    return res.json({ data });
   }
   async create(req: Request, res: Response) {
     const { name, description } = req.body;
     const newRoom = RoomRepository.create({ name, description });
     const data = await RoomRepository.save(newRoom);
 
-    return res.send({ data });
+    return res.json({ data });
   }
 
   async createVideo(req: Request, res: Response) {
@@ -31,7 +31,7 @@ export class RoomController {
     const newVideo = VideoRepository.create({ title, url, block, room });
     const data = await VideoRepository.save(newVideo);
 
-    return res.send({ data });
+    return res.json({ data });
   }
 
   async subjectRoom(req: Request, res: Response) {
@@ -55,7 +55,7 @@ export class RoomController {
 
     await RoomRepository.save(roomUpdate);
 
-    return res.status(200).send({ room });
+    return res.status(200).json({ room });
   }
   async listOnly(req: Request, res: Response) {
     const { idRoom } = req.params;
@@ -66,6 +66,6 @@ export class RoomController {
       },
       where: { id: idRoom },
     });
-    return res.send({ rooms });
+    return res.json({ rooms });
   }
 }
